@@ -258,6 +258,6 @@ with row4_3:
 # Title
 st.title("References")
 st.markdown('Bondarenko, O. (2003). Estimation of risk-neutral densities using positive convolution approximation. Journal of Econometrics, 116(1-2), 85-112 ')
-st.markdown('Jackwerth, J. C. “Option-Implied Risk-Neutral Distributions and Risk Aversion” (2004), Research Foundation of AIMR, Charlottesville, VA, ISBN 0-943205-66-2.')
+st.markdown('Jackwerth, J. C. (2004). Option-Implied Risk-Neutral Distributions and Risk Aversion, Research Foundation of AIMR, Charlottesville, VA, ISBN 0-943205-66-2.')
 
 
