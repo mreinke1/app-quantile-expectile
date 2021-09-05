@@ -188,7 +188,7 @@ with row4_3:
     ax.set_ylim(0, 1)
     ax.set_xlabel("x")
     ax.set_ylabel("P(x)")
-    st.pyplot(fig, use_container_width=True) 
+    st.pyplot(fig) 
     #st.line_chart(source_bondarenko['EAlpha'])
 
 
