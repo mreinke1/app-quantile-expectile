@@ -5,6 +5,11 @@ import streamlit as st
 import pandas as pd
 import matplotlib as plt
 
+font = {'family' : 'DejaVu Sans',
+        'weight' : 'normal',
+        'size'   : 5}
+plt.rc('font', **font)
+
 
 st.set_page_config(layout="wide")
 
@@ -136,22 +141,42 @@ source_bookSala = get_dataset(groupList_bookSala, date_selected, 'bookSala')
 source_jackwerth = get_dataset(groupList_jackwerth, date_selected, 'jackwerth')
 source_bondarenko = get_dataset(groupList_bondarenko, date_selected, 'bondarenko')
 
-
-
 # =============================================================================
 # Our approach BIRS
 # =============================================================================
 with row2_1:
     st.write("Our approach (BIRS)")
-    st.line_chart(source_bookSala['prices'])
+    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    ax.plot(source_bookSala['prices'],'k', linewidth=1)
+    ax.set_ylim(0, 200)
+    ax.set_xlim(0.7, 1.2)
+    ax.set_xlabel("Forward moneyness (K/F)")
+    ax.grid(alpha = 0.3)
+    st.pyplot(fig) 
+    #st.line_chart(source_bookSala['prices'])
 
 with row2_2:
     st.write("Quantile-CDF")
-    st.line_chart(source_bookSala['QAlpha'])
+    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    ax.plot(source_bookSala['QAlpha'],'k', linewidth=1)
+    ax.set_ylim(0, 1)
+    ax.set_xlim(0.7, 1.2)
+    ax.set_xlabel("Forward moneyness (K/F)")
+    ax.grid(alpha = 0.3)
+    st.pyplot(fig)
+    #st.line_chart(source_bookSala['QAlpha'])
 
 with row2_3:
     st.write("Expectile-CDF")
-    st.line_chart(source_bookSala['EAlpha'])
+    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    ax.plot(source_bookSala['EAlpha'],'k', linewidth=1)
+    ax.set_ylim(0, 1)
+    ax.set_xlim(0.7, 1.2)
+    ax.set_xlabel("Forward moneyness (K/F)")
+    ax.grid(alpha = 0.3)
+    st.pyplot(fig)
+    
+    #st.line_chart(source_bookSala['EAlpha'])
 
 
 # =============================================================================
@@ -159,15 +184,37 @@ with row2_3:
 # =============================================================================
 with row3_1:
     st.write("Jackwerth (2004)")
-    st.line_chart(source_jackwerth['prices'])
+    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    ax.plot(source_jackwerth['prices'],'k', linewidth=1)
+    ax.set_ylim(0, 200)
+    ax.set_xlim(0.7, 1.2)
+    ax.set_xlabel("Forward moneyness (K/F)")
+    ax.grid(alpha = 0.3)
+    st.pyplot(fig) 
+    #st.line_chart(source_jackwerth['prices'])
 
 with row3_2:
     st.write("Quantile-CDF")
-    st.line_chart(source_jackwerth['QAlpha'])
+    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    ax.plot(source_jackwerth['QAlpha'],'k', linewidth=1)
+    ax.set_ylim(0, 1)
+    ax.set_xlim(0.7, 1.2)
+    ax.set_xlabel("Forward moneyness (K/F)")
+    ax.grid(alpha = 0.3)
+    st.pyplot(fig) 
+    # st.line_chart(source_jackwerth['QAlpha'])
+
 
 with row3_3:
     st.write("Expectile-CDF")
-    st.line_chart(source_jackwerth['EAlpha'])
+    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    ax.plot(source_jackwerth['EAlpha'], 'k',linewidth=1)
+    ax.set_ylim(0, 1)
+    ax.set_xlim(0.7, 1.2)
+    ax.set_xlabel("Forward moneyness (K/F)")
+    ax.grid(alpha = 0.3)
+    st.pyplot(fig)
+    #st.line_chart(source_jackwerth['EAlpha'])
 
 
 # =============================================================================
@@ -175,19 +222,32 @@ with row3_3:
 # =============================================================================
 with row4_1:
     st.write("Bondarenko (2003)")
-    st.line_chart(source_bondarenko['prices'])
+    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    ax.plot(source_bondarenko['prices'],'k', linewidth=1)
+    ax.set_ylim(0, 200)
+    ax.set_xlim(0.7, 1.2)
+    ax.set_xlabel("Forward moneyness (K/F)")
+    ax.grid(alpha = 0.3)
+    st.pyplot(fig) 
 
 with row4_2:
     st.write("Quantile-CDF")
-    st.line_chart(source_bondarenko['QAlpha'])
+    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    ax.plot(source_bondarenko['QAlpha'],'k', linewidth=1)
+    ax.set_ylim(0, 1)
+    ax.set_xlim(0.7, 1.2)
+    ax.set_xlabel("Forward moneyness (K/F)")
+    ax.grid(alpha = 0.3)
+    st.pyplot(fig) 
 
 with row4_3:
     st.write("Expectile-CDF")
-    fig, ax = plt.pyplot.subplots(figsize=(7, 3))
-    ax.plot(source_bondarenko['QAlpha'])
+    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    ax.plot(source_bondarenko['EAlpha'],'k', linewidth=1)
     ax.set_ylim(0, 1)
-    ax.set_xlabel("x")
-    ax.set_ylabel("P(x)")
+    ax.set_xlim(0.7, 1.2)
+    ax.set_xlabel("Forward moneyness (K/F)")
+    ax.grid(alpha = 0.3)
     st.pyplot(fig) 
     #st.line_chart(source_bondarenko['EAlpha'])
 
