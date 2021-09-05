@@ -135,6 +135,7 @@ days = [str(x) for x in range(len(g_date_expiry_jackwerth))]
 # Define helper functions
 # =============================================================================
 # Filter data by date selected
+@st.cache
 def get_dataset(groupList, date, dataset_name):
     
     date_num = int(date)
