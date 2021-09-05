@@ -3,7 +3,7 @@
 # =============================================================================
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import matplotlib as plt
 
 
 st.set_page_config(layout="wide")
@@ -183,7 +183,7 @@ with row4_2:
 
 with row4_3:
     st.write("Expectile-CDF")
-    fig, ax = plt.subplots(figsize=(7, 3))
+    fig, ax = plt.pyplot.subplots(figsize=(7, 3))
     ax.plot(source_bondarenko['QAlpha'])
     ax.set_ylim(0, 1)
     ax.set_xlabel("x")
