@@ -3,19 +3,21 @@
 # =============================================================================
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+
 
 st.set_page_config(layout="wide")
 
 # Title
 st.title("Visualisation of option implied quantiles and expectiles")
-st.markdown('Web App by Martin Reinke ([reinke@lmu.de](https://github.com/mreinke1))')
+st.markdown('This project is joint work with [Arthur Böök](https://de.linkedin.com/in/arthurbook), [Juan Imbet](https://jfimbett.github.io), '
+            '[Martin Reinke](https://www.en.bank.bwl.uni-muenchen.de/team/mitarbeiter/reinke/index.html) and [Carlo Sala](https://www.esade.edu/faculty/carlo.sala).')
 st.markdown("")
-st.markdown("This app allows you to see the estimation result for different methods"
-            " employed to estimated option implied quantiles and expectiles."
-            "The paper is currently work in progress by XXX.")
-
-with st.expander("Data Information"):
-    st.markdown("Weekly option data from OptionMetrics.")
+st.markdown('This app allows you to see per day the estimation result for our proposed method (BIRS)'
+            ' and two other methods proposed in the literature.')
+st.markdown('Please note that the paper is currently work in progress. Comments welcome.')
+st.markdown("")
+st.markdown("Option data on 'Weeklys' are downloaded from OptionMetrics.")
 
 
 # =============================================================================
@@ -91,14 +93,14 @@ groupList_arbViolations  = list(g_date_expiry_arbViolations)
 # =============================================================================
 
 # LAYING OUT THE TOP SECTION OF THE APP
-row1_1, row1_2 = st.columns((5,3))
+row1_1, row1_2 = st.columns((4,3))
 
 with row1_1:
-    st.title("Estimated option implied quantile and expectiles")
+    st.title("Estimated option implied quantiles and expectiles")
     date_selected = st.slider("Select date in the sample", 0, len(g_date_expiry_jackwerth))
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
-row2_0, row2_1, row2_2, row2_3, row2_4 = st.columns((1,1,1,1))
+row2_1, row2_2, row2_3, row2_4 = st.columns((1,1,1,1))
 row3_1, row3_2, row3_3, row3_4 = st.columns((1,1,1,1))
 row4_1, row4_2, row4_3, row4_4 = st.columns((1,1,1,1))
 
@@ -124,6 +126,8 @@ def get_dataset(groupList, date, dataset_name):
     
     resultsSort =  results.sort_values('K/F')
     
+    resultsSort = resultsSort.set_index('K/F')
+    
     return resultsSort
 
 
@@ -137,15 +141,16 @@ source_bondarenko = get_dataset(groupList_bondarenko, date_selected, 'bondarenko
 # =============================================================================
 # Our approach BIRS
 # =============================================================================
-with row2_0:
-    st.write("BIRS (our approach)")
-    
 with row2_1:
-    #st.write("BIRS (our approach)")
-    st.line_chart(source_bookSala['QAlpha'])
+    st.write("Our approach (BIRS)")
+    st.line_chart(source_bookSala['prices'])
 
 with row2_2:
-    st.write("")
+    st.write("Quantile-CDF")
+    st.line_chart(source_bookSala['QAlpha'])
+
+with row2_3:
+    st.write("Expectile-CDF")
     st.line_chart(source_bookSala['EAlpha'])
 
 
@@ -154,10 +159,14 @@ with row2_2:
 # =============================================================================
 with row3_1:
     st.write("Jackwerth (2004)")
-    st.line_chart(source_jackwerth['QAlpha'])
+    st.line_chart(source_jackwerth['prices'])
 
 with row3_2:
-    st.write("Jackwerth (2004)")
+    st.write("Quantile-CDF")
+    st.line_chart(source_jackwerth['QAlpha'])
+
+with row3_3:
+    st.write("Expectile-CDF")
     st.line_chart(source_jackwerth['EAlpha'])
 
 
@@ -166,26 +175,22 @@ with row3_2:
 # =============================================================================
 with row4_1:
     st.write("Bondarenko (2003)")
-    st.line_chart(source_bondarenko['QAlpha'])
+    st.line_chart(source_bondarenko['prices'])
 
 with row4_2:
-    st.write("Bondarenko (2003)")
-    st.line_chart(source_bondarenko['EAlpha'])
+    st.write("Quantile-CDF")
+    st.line_chart(source_bondarenko['QAlpha'])
 
+with row4_3:
+    st.write("Expectile-CDF")
+    fig, ax = plt.subplots(figsize=(7, 3))
+    ax.plot(source_bondarenko['QAlpha'])
+    ax.set_ylim(0, 1)
+    ax.set_xlabel("x")
+    ax.set_ylabel("P(x)")
+    st.pyplot(fig, use_container_width=True) 
+    #st.line_chart(source_bondarenko['EAlpha'])
 
-
-
-# with row2_2:
-#     st.write("**La Guardia Airport**")
-#     map(data, la_guardia[0],la_guardia[1], zoom_level)
-
-# with row2_3:
-#     st.write("**JFK Airport**")
-#     map(data, jfk[0],jfk[1], zoom_level)
-
-# with row2_4:
-#     st.write("**Newark Airport**")
-#     map(data, newark[0],newark[1], zoom_level)
 
 
 
