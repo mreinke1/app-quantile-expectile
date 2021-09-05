@@ -129,13 +129,13 @@ row4_1, row4_2, row4_3, row4_4 = st.columns((1,1,1,1))
 
 
 date = '0'
-days = [str(x) for x in range(len(g_date_expiry_jackwerth))]
+days = [str(x) for x in range(len(g_date_expiry_jackwerth)-1)]
 
 # =============================================================================
 # Define helper functions
 # =============================================================================
 # Filter data by date selected
-@st.cache
+
 def get_dataset(groupList, date, dataset_name):
     
     date_num = int(date)
