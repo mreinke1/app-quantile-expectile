@@ -18,7 +18,6 @@ with st.expander("Data Information"):
     st.markdown("Weekly option data from OptionMetrics.")
 
 
-
 # =============================================================================
 # Load results data for Böök and Sala
 # =============================================================================
@@ -98,12 +97,53 @@ with row1_1:
     st.title("Estimated option implied quantile and expectiles")
     date_selected = st.slider("Select date in the sample", 0, len(g_date_expiry_jackwerth))
 
+# LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
+row2_1, row2_2, row2_3, row2_4 = st.columns((2,1,1,1))
 
 date = '0'
 days = [str(x) for x in range(len(g_date_expiry_jackwerth))]
 
+# =============================================================================
+# Define helper functions
+# =============================================================================
+# Filter data by date selected
+def get_dataset(groupList, date, dataset_name):
+    
+    date_num = int(date)
+    raw_data = ['lcs', 'arbViolations']
+    
+    if any(x in dataset_name for x in raw_data):
+        results = groupList[date_num][1][['K/F', 'strike_price', 'forward_price', 'callprice','iv_raw']]
+    
+    else:
+        results = groupList[date_num][1][['K/F', 'strike', 'forward', 'prices', 'vols', 'QAlpha', 'QPDF', 'EAlpha','EPDF']]
+    
+    
+    resultsSort =  results.sort_values('K/F')
+    
+    return resultsSort
 
 
+source_bookSala = get_dataset(groupList_bookSala, date_selected, 'bookSala')
+
+
+with row2_1:
+    st.write("BIRS")
+    st.line_chart(source_bookSala['EAlpha'])
+
+
+
+# with row2_2:
+#     st.write("**La Guardia Airport**")
+#     map(data, la_guardia[0],la_guardia[1], zoom_level)
+
+# with row2_3:
+#     st.write("**JFK Airport**")
+#     map(data, jfk[0],jfk[1], zoom_level)
+
+# with row2_4:
+#     st.write("**Newark Airport**")
+#     map(data, newark[0],newark[1], zoom_level)
 
 
 
