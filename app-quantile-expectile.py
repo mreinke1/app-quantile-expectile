@@ -91,14 +91,17 @@ groupList_arbViolations  = list(g_date_expiry_arbViolations)
 # =============================================================================
 
 # LAYING OUT THE TOP SECTION OF THE APP
-row1_1, row1_2 = st.columns((4,3))
+row1_1, row1_2 = st.columns((5,3))
 
 with row1_1:
     st.title("Estimated option implied quantile and expectiles")
     date_selected = st.slider("Select date in the sample", 0, len(g_date_expiry_jackwerth))
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
-row2_1, row2_2, row2_3, row2_4 = st.columns((2,1,1,1))
+row2_0, row2_1, row2_2, row2_3, row2_4 = st.columns((1,1,1,1))
+row3_1, row3_2, row3_3, row3_4 = st.columns((1,1,1,1))
+row4_1, row4_2, row4_3, row4_4 = st.columns((1,1,1,1))
+
 
 date = '0'
 days = [str(x) for x in range(len(g_date_expiry_jackwerth))]
@@ -124,12 +127,51 @@ def get_dataset(groupList, date, dataset_name):
     return resultsSort
 
 
+# Get data from selection
 source_bookSala = get_dataset(groupList_bookSala, date_selected, 'bookSala')
+source_jackwerth = get_dataset(groupList_jackwerth, date_selected, 'jackwerth')
+source_bondarenko = get_dataset(groupList_bondarenko, date_selected, 'bondarenko')
 
 
+
+# =============================================================================
+# Our approach BIRS
+# =============================================================================
+with row2_0:
+    st.write("BIRS (our approach)")
+    
 with row2_1:
-    st.write("BIRS")
+    #st.write("BIRS (our approach)")
+    st.line_chart(source_bookSala['QAlpha'])
+
+with row2_2:
+    st.write("")
     st.line_chart(source_bookSala['EAlpha'])
+
+
+# =============================================================================
+# Jackwerth (2004)
+# =============================================================================
+with row3_1:
+    st.write("Jackwerth (2004)")
+    st.line_chart(source_jackwerth['QAlpha'])
+
+with row3_2:
+    st.write("Jackwerth (2004)")
+    st.line_chart(source_jackwerth['EAlpha'])
+
+
+# =============================================================================
+# Bondarenko (2003)
+# =============================================================================
+with row4_1:
+    st.write("Bondarenko (2003)")
+    st.line_chart(source_bondarenko['QAlpha'])
+
+with row4_2:
+    st.write("Bondarenko (2003)")
+    st.line_chart(source_bondarenko['EAlpha'])
+
 
 
 
