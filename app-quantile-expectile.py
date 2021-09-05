@@ -146,7 +146,7 @@ source_bondarenko = get_dataset(groupList_bondarenko, date_selected, 'bondarenko
 # =============================================================================
 with row2_1:
     st.write("Our approach (BIRS)")
-    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
     ax.plot(source_bookSala['prices'],'k', linewidth=1)
     ax.set_ylim(0, 200)
     ax.set_xlim(0.7, 1.2)
@@ -157,7 +157,7 @@ with row2_1:
 
 with row2_2:
     st.write("Quantile-CDF")
-    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
     ax.plot(source_bookSala['QAlpha'],'k', linewidth=1)
     ax.set_ylim(0, 1)
     ax.set_xlim(0.7, 1.2)
@@ -168,7 +168,7 @@ with row2_2:
 
 with row2_3:
     st.write("Expectile-CDF")
-    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
     ax.plot(source_bookSala['EAlpha'],'k', linewidth=1)
     ax.set_ylim(0, 1)
     ax.set_xlim(0.7, 1.2)
@@ -184,7 +184,7 @@ with row2_3:
 # =============================================================================
 with row3_1:
     st.write("Jackwerth (2004)")
-    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
     ax.plot(source_jackwerth['prices'],'k', linewidth=1)
     ax.set_ylim(0, 200)
     ax.set_xlim(0.7, 1.2)
@@ -195,7 +195,7 @@ with row3_1:
 
 with row3_2:
     st.write("Quantile-CDF")
-    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
     ax.plot(source_jackwerth['QAlpha'],'k', linewidth=1)
     ax.set_ylim(0, 1)
     ax.set_xlim(0.7, 1.2)
@@ -207,7 +207,7 @@ with row3_2:
 
 with row3_3:
     st.write("Expectile-CDF")
-    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
     ax.plot(source_jackwerth['EAlpha'], 'k',linewidth=1)
     ax.set_ylim(0, 1)
     ax.set_xlim(0.7, 1.2)
@@ -222,7 +222,7 @@ with row3_3:
 # =============================================================================
 with row4_1:
     st.write("Bondarenko (2003)")
-    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
     ax.plot(source_bondarenko['prices'],'k', linewidth=1)
     ax.set_ylim(0, 200)
     ax.set_xlim(0.7, 1.2)
@@ -232,7 +232,7 @@ with row4_1:
 
 with row4_2:
     st.write("Quantile-CDF")
-    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
     ax.plot(source_bondarenko['QAlpha'],'k', linewidth=1)
     ax.set_ylim(0, 1)
     ax.set_xlim(0.7, 1.2)
@@ -242,7 +242,7 @@ with row4_2:
 
 with row4_3:
     st.write("Expectile-CDF")
-    fig, ax = plt.pyplot.subplots(figsize=(1.5, 1.5))
+    fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
     ax.plot(source_bondarenko['EAlpha'],'k', linewidth=1)
     ax.set_ylim(0, 1)
     ax.set_xlim(0.7, 1.2)
