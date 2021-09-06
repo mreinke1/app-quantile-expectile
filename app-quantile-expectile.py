@@ -2,8 +2,11 @@
 # Load modules
 # =============================================================================
 import streamlit as st
+import altair as alt
 import pandas as pd
 import matplotlib as plt
+from bokeh.plotting import figure
+
 
 font = {'family' : 'DejaVu Sans',
         'weight' : 'normal',
@@ -101,7 +104,7 @@ groupList_arbViolations  = list(g_date_expiry_arbViolations)
 row1_1, row1_2 = st.columns((4,3))
 
 with row1_1:
-    st.title("Estimated option implied quantiles and expectiles")
+    st.header("Estimation of option implied quantiles and expectiles")
     date_selected = st.slider("Select date in the sample", 0, len(g_date_expiry_jackwerth)-1)
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
@@ -132,7 +135,7 @@ def get_dataset(groupList, date, dataset_name):
     
     resultsSort =  results.sort_values('K/F')
     
-    resultsSort = resultsSort.set_index('K/F')
+    #resultsSort = resultsSort.set_index('K/F')
     
     return resultsSort
 
@@ -243,21 +246,35 @@ with row4_2:
 
 with row4_3:
     st.write("Expectile-CDF")
-    fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
-    ax.plot(source_bondarenko['EAlpha'],'k', linewidth=1)
-    ax.set_ylim(0, 1)
-    ax.set_xlim(0.7, 1.2)
-    ax.set_xlabel("Forward moneyness (K/F)")
-    ax.grid(alpha = 0.3)
-    st.pyplot(fig) 
-    #st.line_chart(source_bondarenko['EAlpha'])
-
-
+    # Create CDF
+    s2 = figure(x_range=(0.6, 1.3), y_range =(0, 1.1))
+    s2.line(source_bondarenko['K/F'], source_bondarenko['EAlpha'], line_color="black", line_width=2) # QAlpha
+    st.bokeh_chart(s2, use_container_width=True)
 
 
 # Title
-st.title("References")
+st.header("References")
 st.markdown('Bondarenko, O. (2003). Estimation of risk-neutral densities using positive convolution approximation. Journal of Econometrics, 116(1-2), 85-112 ')
 st.markdown('Jackwerth, J. C. (2004). Option-Implied Risk-Neutral Distributions and Risk Aversion, Research Foundation of AIMR, Charlottesville, VA, ISBN 0-943205-66-2.')
 
 
+    #c = alt.Chart(source_bondarenko['QAlpha']).mark_circle().encode(x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c'])
+    #st.altair_chart(c, use_container_width=True)
+    # fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
+    # ax.plot(source_bondarenko['EAlpha'],'k', linewidth=1)
+    # ax.set_ylim(0, 1)
+    # ax.set_xlim(0.7, 1.2)
+    # ax.set_xlabel("Forward moneyness (K/F)")
+    # ax.grid(alpha = 0.3)
+    # st.pyplot(fig) 
+    #st.line_chart(source_bondarenko['EAlpha'])
+
+
+# p = figure(
+# ...     title='simple line example',
+# ...     x_axis_label='x',
+# ...     y_axis_label='y')
+# ...
+# >>> p.line(x, y, legend_label='Trend', line_width=2)
+# >>>
+# >>> st.bokeh_chart(p, use_container_width=True)
