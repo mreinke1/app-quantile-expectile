@@ -29,22 +29,22 @@ st.markdown("Option data on 'Weeklys' are downloaded from OptionMetrics.")
 
 
 # =============================================================================
-# Load results data for Böök and Sala
+# Load results data for our approach (BIRS)
 # =============================================================================
-filenameBookSala = 'results_bookSala.parquet.gzip'
+filenamebirs = 'results_birs_noLCS.parquet.gzip'
 root = './data/'
-location = root + filenameBookSala
-results_bookSala = pd.read_parquet(location)
+location = root + filenamebirs
+results_birs = pd.read_parquet(location)
 
 # Group Panel by date and expiry
-g_date_expiry_bookSala = results_bookSala.groupby(['date'])
+g_date_expiry_birs = results_birs.groupby(['date'])
 # Extract as list, for easier access
-groupList_bookSala  = list(g_date_expiry_bookSala)
+groupList_birs  = list(g_date_expiry_birs)
 
 # =============================================================================
 # Load results data for Jackwerth (2004)
 # =============================================================================
-filename_jackwerth = 'results_jackwerth.parquet.gzip'
+filename_jackwerth = 'results_jackwerth_noLCS.parquet.gzip'
 root = './data/'
 location = root + filename_jackwerth
 results_jackwerth = pd.read_parquet(location)
@@ -58,7 +58,7 @@ groupList_jackwerth  = list(g_date_expiry_jackwerth)
 # =============================================================================
 # Load results data for Bondarenko (2003)
 # =============================================================================
-filename_bondarenko = 'results_bondarenko.parquet.gzip'
+filename_bondarenko = 'results_bondarenko_noLCS.parquet.gzip'
 root = './data/'
 location = root + filename_bondarenko
 results_bondarenko = pd.read_parquet(location)
@@ -140,7 +140,7 @@ def get_dataset(groupList, date, dataset_name):
     return resultsSort
 
 # Get data from selection
-source_bookSala = get_dataset(groupList_bookSala, date_selected, 'bookSala')
+source_birs = get_dataset(groupList_birs, date_selected, 'birs')
 source_jackwerth = get_dataset(groupList_jackwerth, date_selected, 'jackwerth')
 source_bondarenko = get_dataset(groupList_bondarenko, date_selected, 'bondarenko')
 
@@ -150,7 +150,7 @@ source_bondarenko = get_dataset(groupList_bondarenko, date_selected, 'bondarenko
 
 with row2_1:
     st.write("Our approach (BIRS)")
-    c = alt.Chart(source_bookSala[['K/F','prices']]).mark_line(clip=True).encode(
+    c = alt.Chart(source_birs[['K/F','prices']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
         alt.Y('prices', scale=alt.Scale(domain=[0, 150]), axis=alt.Axis(title='in USD'))
         )
@@ -158,7 +158,7 @@ with row2_1:
     
 with row2_2:
     st.write("Quantile-CDF")
-    c = alt.Chart(source_bookSala[['K/F','QAlpha']]).mark_line(clip=True).encode(
+    c = alt.Chart(source_birs[['K/F','QAlpha']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
         alt.Y('QAlpha', scale=alt.Scale(domain=[0, 1.1]), axis=alt.Axis(title=''))
         )
@@ -166,7 +166,7 @@ with row2_2:
 
 with row2_3:
     st.write("Expectile-CDF")
-    c = alt.Chart(source_bookSala[['K/F','EAlpha']]).mark_line(clip=True).encode(
+    c = alt.Chart(source_birs[['K/F','EAlpha']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
         alt.Y('EAlpha', scale=alt.Scale(domain=[0, 1.1]), axis=alt.Axis(title=''))
         )
@@ -204,9 +204,8 @@ with row3_3:
 # =============================================================================
 # Bondarenko (2003)
 # =============================================================================
-st.subheader("Bondarenko (2003)")
 with row4_1:
-    st.write("Interpolated option prices")
+    st.write("Bondarenko (2003)")
     c = alt.Chart(source_bondarenko[['K/F','prices']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
         alt.Y('prices', scale=alt.Scale(domain=[0, 150]), axis=alt.Axis(title='in USD'))
