@@ -10,7 +10,8 @@ st.set_page_config(layout="wide")
 # Title
 st.title("Visualisation of option implied quantiles and expectiles")
 st.markdown('This project is joint work with [Arthur Böök](https://de.linkedin.com/in/arthurbook), [Juan Imbet](https://jfimbett.github.io), '
-            '[Martin Reinke](https://www.en.bank.bwl.uni-muenchen.de/team/mitarbeiter/reinke/index.html) and [Carlo Sala](https://www.esade.edu/faculty/carlo.sala).')
+            '[Martin Reinke](https://www.en.bank.bwl.uni-muenchen.de/team/mitarbeiter/reinke/index.html) and [Carlo Sala](https://www.esade.edu/faculty/carlo.sala).'
+            'The Github repository is available [here](https://github.com/mreinke1/app-quantile-expectile)')
 st.markdown('This app allows you to see per day the estimation result for our proposed method (BIRS) to extract option implied quantiles and expectiles.'
             ' We benchmark our approach with two other methods proposed in the literature.'
             ' Please note that the paper is currently work in progress. Comments welcome.')
