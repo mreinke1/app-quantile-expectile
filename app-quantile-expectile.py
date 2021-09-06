@@ -27,13 +27,13 @@ st.markdown("We use short term options so called 'weeklys' on the S&P 500 traded
             " Statistically, quantiles and expectiles share many similar properties but differ substantially in one aspect."
             " While quantiles determines the value of X such that the probability of the variable being less than or equal to "
             " that value equals a given level. Expectiles are linked to the properties of the expectation"
-            " of the random variable X, conditional on X being into the tail of the distribution")
+            " of the random variable X, conditional on X being into the tail of the distribution.")
 
-st.subheader("Calculataion of the option implied quantiles")
+st.subheader("Option implied quantiles")
 st.latex(r'''
-         \alpha = e^{r(T-t)} \left[ \lambda \dfrac{C_{t,T}(K_{i+1})-C_{t,T}(K_{i})}{K_{i+1}- K_{i}} + \left(1- \lambda \right) \dfrac{C_{t,T}(K_{i})-C_{t,T}(K_{i-1})}{K_{i}- K_{i-1}} \right] +1\\
+         \alpha_{t,T}(K_{i}) = e^{r(T-t)} \left[ \lambda \dfrac{C_{t,T}(K_{i+1})-C_{t,T}(K_{i})}{K_{i+1}- K_{i}} + \left(1- \lambda \right) \dfrac{C_{t,T}(K_{i})-C_{t,T}(K_{i-1})}{K_{i}- K_{i-1}} \right] +1\\
          ''')
-st.subheader("Calculataion of the option implied expectiles")
+st.subheader("Option implied expectiles")
 st.latex(r'''
          \theta_{t,T}(K_{i}) = \dfrac{P_{t,T}(K_{i})}{P_{t,T}(K_{i}) + C_{t,T}(K_{i})}
          ''')
