@@ -107,7 +107,7 @@ with row1_1:
     st.header("Estimation of option implied quantiles and expectiles")
     date_selected = st.slider("Select date in the sample", 0, len(g_date_expiry_jackwerth)-1)
 
-# LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
+# LAYING OUT THE MIDDLE SECTION OF THE APP
 row2_1, row2_2, row2_3, row2_4 = st.columns((1,1,1,1))
 row3_1, row3_2, row3_3, row3_4 = st.columns((1,1,1,1))
 row4_1, row4_2, row4_3, row4_4 = st.columns((1,1,1,1))
@@ -139,7 +139,6 @@ def get_dataset(groupList, date, dataset_name):
     
     return resultsSort
 
-
 # Get data from selection
 source_bookSala = get_dataset(groupList_bookSala, date_selected, 'bookSala')
 source_jackwerth = get_dataset(groupList_jackwerth, date_selected, 'jackwerth')
@@ -148,6 +147,7 @@ source_bondarenko = get_dataset(groupList_bondarenko, date_selected, 'bondarenko
 # =============================================================================
 # Our approach BIRS
 # =============================================================================
+
 with row2_1:
     st.write("Our approach (BIRS)")
     c = alt.Chart(source_bookSala[['K/F','prices']]).mark_line(clip=True).encode(
@@ -156,16 +156,6 @@ with row2_1:
         )
     st.altair_chart(c, use_container_width=True)
     
-    # st.write("Our approach (BIRS)")
-    # fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
-    # ax.plot(source_bookSala['prices'],'k', linewidth=1)
-    # ax.set_ylim(0, 200)
-    # ax.set_xlim(0.7, 1.2)
-    # ax.set_xlabel("Forward moneyness (K/F)")
-    # ax.grid(alpha = 0.3)
-    # st.pyplot(fig) 
-    #st.line_chart(source_bookSala['prices'])
-
 with row2_2:
     st.write("Quantile-CDF")
     c = alt.Chart(source_bookSala[['K/F','QAlpha']]).mark_line(clip=True).encode(
@@ -173,16 +163,6 @@ with row2_2:
         alt.Y('QAlpha', scale=alt.Scale(domain=[0, 1.1]), axis=alt.Axis(title=''))
         )
     st.altair_chart(c, use_container_width=True)
-    
-    # st.write("Quantile-CDF")
-    # fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
-    # ax.plot(source_bookSala['QAlpha'],'k', linewidth=1)
-    # ax.set_ylim(0, 1)
-    # ax.set_xlim(0.7, 1.2)
-    # ax.set_xlabel("Forward moneyness (K/F)")
-    # ax.grid(alpha = 0.3)
-    # st.pyplot(fig)
-    #st.line_chart(source_bookSala['QAlpha'])
 
 with row2_3:
     st.write("Expectile-CDF")
@@ -191,17 +171,6 @@ with row2_3:
         alt.Y('EAlpha', scale=alt.Scale(domain=[0, 1.1]), axis=alt.Axis(title=''))
         )
     st.altair_chart(c, use_container_width=True)
-    
-    # st.write("Expectile-CDF")
-    # fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
-    # ax.plot(source_bookSala['EAlpha'],'k', linewidth=1)
-    # ax.set_ylim(0, 1)
-    # ax.set_xlim(0.7, 1.2)
-    # ax.set_xlabel("Forward moneyness (K/F)")
-    # ax.grid(alpha = 0.3)
-    # st.pyplot(fig)
-    
-    #st.line_chart(source_bookSala['EAlpha'])
 
 
 # =============================================================================
@@ -214,15 +183,6 @@ with row3_1:
         alt.Y('prices', scale=alt.Scale(domain=[0, 150]), axis=alt.Axis(title='in USD'))
         )
     st.altair_chart(c, use_container_width=True)
-    
-    # fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
-    # ax.plot(source_jackwerth['prices'],'k', linewidth=1)
-    # ax.set_ylim(0, 200)
-    # ax.set_xlim(0.7, 1.2)
-    # ax.set_xlabel("Forward moneyness (K/F)")
-    # ax.grid(alpha = 0.3)
-    # st.pyplot(fig) 
-    #st.line_chart(source_jackwerth['prices'])
 
 with row3_2:
     st.write("Quantile-CDF")
@@ -231,16 +191,6 @@ with row3_2:
         alt.Y('QAlpha', scale=alt.Scale(domain=[0, 1.1]), axis=alt.Axis(title=''))
         )
     st.altair_chart(c, use_container_width=True)
-    
-    
-    # fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
-    # ax.plot(source_jackwerth['QAlpha'],'k', linewidth=1)
-    # ax.set_ylim(0, 1)
-    # ax.set_xlim(0.7, 1.2)
-    # ax.set_xlabel("Forward moneyness (K/F)")
-    # ax.grid(alpha = 0.3)
-    # st.pyplot(fig) 
-    # st.line_chart(source_jackwerth['QAlpha'])
 
 
 with row3_3:
@@ -250,38 +200,18 @@ with row3_3:
         alt.Y('EAlpha', scale=alt.Scale(domain=[0, 1.1]), axis=alt.Axis(title=''))
         )
     st.altair_chart(c, use_container_width=True)
-    
-    
-    
-    # fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
-    # ax.plot(source_jackwerth['EAlpha'], 'k',linewidth=1)
-    # ax.set_ylim(0, 1)
-    # ax.set_xlim(0.7, 1.2)
-    # ax.set_xlabel("Forward moneyness (K/F)")
-    # ax.grid(alpha = 0.3)
-    # st.pyplot(fig)
-    #st.line_chart(source_jackwerth['EAlpha'])
-
 
 # =============================================================================
 # Bondarenko (2003)
 # =============================================================================
+st.subheader("Bondarenko (2003)")
 with row4_1:
-    st.write("Bondarenko (2003)")
+    st.write("Interpolated option prices")
     c = alt.Chart(source_bondarenko[['K/F','prices']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
         alt.Y('prices', scale=alt.Scale(domain=[0, 150]), axis=alt.Axis(title='in USD'))
         )
     st.altair_chart(c, use_container_width=True)
-    
-    
-    # fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
-    # ax.plot(source_bondarenko['prices'],'k', linewidth=1)
-    # ax.set_ylim(0, 200)
-    # ax.set_xlim(0.7, 1.2)
-    # ax.set_xlabel("Forward moneyness (K/F)")
-    # ax.grid(alpha = 0.3)
-    # st.pyplot(fig) 
 
 with row4_2:
     st.write("Quantile-CDF")
@@ -291,14 +221,6 @@ with row4_2:
         )
     st.altair_chart(c, use_container_width=True)
     
-    # fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
-    # ax.plot(source_bondarenko['QAlpha'],'k', linewidth=1)
-    # ax.set_ylim(0, 1)
-    # ax.set_xlim(0.7, 1.2)
-    # ax.set_xlabel("Forward moneyness (K/F)")
-    # ax.grid(alpha = 0.3)
-    # st.pyplot(fig) 
-
 with row4_3:
     st.write("Expectile-CDF")
     c = alt.Chart(source_bondarenko[['K/F','EAlpha']]).mark_line(clip=True).encode(
@@ -310,19 +232,8 @@ with row4_3:
 
 
 
-# Title
+# List of references
 st.header("References")
 st.markdown('Bondarenko, O. (2003). Estimation of risk-neutral densities using positive convolution approximation. Journal of Econometrics, 116(1-2), 85-112 ')
 st.markdown('Jackwerth, J. C. (2004). Option-Implied Risk-Neutral Distributions and Risk Aversion, Research Foundation of AIMR, Charlottesville, VA, ISBN 0-943205-66-2.')
 
-
-    #c = alt.Chart(source_bondarenko['QAlpha']).mark_circle().encode(x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c'])
-    #st.altair_chart(c, use_container_width=True)
-    # fig, ax = plt.pyplot.subplots(figsize=(1.25, 1.25))
-    # ax.plot(source_bondarenko['EAlpha'],'k', linewidth=1)
-    # ax.set_ylim(0, 1)
-    # ax.set_xlim(0.7, 1.2)
-    # ax.set_xlabel("Forward moneyness (K/F)")
-    # ax.grid(alpha = 0.3)
-    # st.pyplot(fig) 
-    #st.line_chart(source_bondarenko['EAlpha'])
