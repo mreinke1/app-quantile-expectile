@@ -5,7 +5,7 @@ import streamlit as st
 import altair as alt
 import pandas as pd
 import matplotlib as plt
-from bokeh.plotting import figure
+#from bokeh.plotting import figure
 
 
 font = {'family' : 'DejaVu Sans',
@@ -247,9 +247,11 @@ with row4_2:
 with row4_3:
     st.write("Expectile-CDF")
     # Create CDF
-    s2 = figure(x_range=(0.6, 1.3), y_range =(0, 1.1))
-    s2.line(source_bondarenko['K/F'], source_bondarenko['EAlpha'], line_color="black", line_width=2) # QAlpha
-    st.bokeh_chart(s2, use_container_width=True)
+    c = alt.Chart(source_bondarenko[['K/F','EAlpha']]).mark_line().encode(
+        x='K/F', y='EAlpha')
+    st.altair_chart(c, use_container_width=True)
+
+
 
 
 # Title
