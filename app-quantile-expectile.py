@@ -5,7 +5,6 @@ import streamlit as st
 import altair as alt
 import pandas as pd
 import matplotlib as plt
-#from bokeh.plotting import figure
 
 
 font = {'family' : 'DejaVu Sans',
