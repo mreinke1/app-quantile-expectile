@@ -247,8 +247,9 @@ with row4_2:
 with row4_3:
     st.write("Expectile-CDF")
     # Create CDF
-    c = alt.Chart(source_bondarenko[['K/F','EAlpha']]).mark_line().encode(
-        x='K/F', y='EAlpha')
+    c = alt.Chart(source_bondarenko[['K/F','EAlpha']]).mark_line(clip=True).encode(
+        alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2])), 
+        alt.Y('EAlpha', scale=alt.Scale(domain=[0, 1.1])))
     st.altair_chart(c, use_container_width=True)
 
 
@@ -270,13 +271,3 @@ st.markdown('Jackwerth, J. C. (2004). Option-Implied Risk-Neutral Distributions 
     # ax.grid(alpha = 0.3)
     # st.pyplot(fig) 
     #st.line_chart(source_bondarenko['EAlpha'])
-
-
-# p = figure(
-# ...     title='simple line example',
-# ...     x_axis_label='x',
-# ...     y_axis_label='y')
-# ...
-# >>> p.line(x, y, legend_label='Trend', line_width=2)
-# >>>
-# >>> st.bokeh_chart(p, use_container_width=True)
