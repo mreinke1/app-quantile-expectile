@@ -4,14 +4,6 @@
 import streamlit as st
 import altair as alt
 import pandas as pd
-import matplotlib as plt
-
-
-font = {'family' : 'DejaVu Sans',
-        'weight' : 'normal',
-        'size'   : 5}
-plt.rc('font', **font)
-
 
 st.set_page_config(layout="wide")
 
