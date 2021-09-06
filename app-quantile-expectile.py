@@ -19,15 +19,24 @@ st.set_page_config(layout="wide")
 st.title("Visualisation of option implied quantiles and expectiles")
 st.markdown('This project is joint work with [Arthur Böök](https://de.linkedin.com/in/arthurbook), [Juan Imbet](https://jfimbett.github.io), '
             '[Martin Reinke](https://www.en.bank.bwl.uni-muenchen.de/team/mitarbeiter/reinke/index.html) and [Carlo Sala](https://www.esade.edu/faculty/carlo.sala).')
+st.markdown('This app allows you to see per day the estimation result for our proposed method (BIRS) to extract option implied quantiles and expectiles.'
+            ' We benchmark our approach with two other methods proposed in the literature.'
+            ' Please note that the paper is currently work in progress. Comments welcome.')
 st.markdown("")
-st.markdown('This app allows you to see per day the estimation result for our proposed method (BIRS)'
-            ' and two other methods proposed in the literature.')
-st.markdown('Please note that the paper is currently work in progress. Comments welcome.')
-st.markdown("")
-st.markdown("Option data on 'Weeklys' are downloaded from OptionMetrics.")
+st.markdown("We use short term options so called 'weeklys' on the S&P 500 traded on the CBOE and downloaded from OptionMetrics."
+            " Statistically, quantiles and expectiles share many similar properties but differ substantially in one aspect."
+            " While quantiles determines the value of X such that the probability of the variable being less than or equal to "
+            " that value equals a given level. Expectiles are linked to the properties of the expectation"
+            " of the random variable X, conditional on X being into the tail of the distribution")
 
-st.header("Caculation")
-st.markdown("To be completed")
+st.subheader("Calculataion of the option implied quantiles")
+st.latex(r'''
+         \alpha = e^{r(T-t)} \left[ \lambda \dfrac{C_{t,T}(K_{i+1})-C_{t,T}(K_{i})}{K_{i+1}- K_{i}} + \left(1- \lambda \right) \dfrac{C_{t,T}(K_{i})-C_{t,T}(K_{i-1})}{K_{i}- K_{i-1}} \right] +1\\
+         ''')
+st.subheader("Calculataion of the option implied expectiles")
+st.latex(r'''
+         \theta_{t,T}(K_{i}) = \dfrac{P_{t,T}(K_{i})}{P_{t,T}(K_{i}) + C_{t,T}(K_{i})}
+         ''')
 
 # =============================================================================
 # Load results data for our approach (BIRS)
