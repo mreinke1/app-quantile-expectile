@@ -157,7 +157,7 @@ with row2_1:
     base = alt.Chart(source_data).mark_circle(clip = True, color = '#7D3C98').encode(
         alt.X("K/F", scale=alt.Scale(domain=[0.7,1.2]), title=''),
         alt.Y("callprice", scale=alt.Scale(domain=[0, 200]), title=''),
-        alt.Color(legend=alt.Legend(values=['Observed market prices'])),
+        alt.Color('symbol',scale=alt.Scale(range=['lightgray'], domain=['AAPL']))
         
 )
     c = alt.Chart(source_birs[['K/F','prices']]).mark_line(clip=True).encode(
