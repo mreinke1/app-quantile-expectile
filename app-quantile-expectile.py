@@ -155,12 +155,13 @@ source_bondarenko = get_dataset(groupList_bondarenko, date_selected, 'bondarenko
 with row2_1:
     st.write("Our approach (BIRS)")
     base = alt.Chart(source_data).mark_circle(color = '#7D3C98').encode(
-        alt.X("K/F"), alt.Y("callprice", )
+        alt.X("K/F"),
+        alt.Y("callprice", scale=alt.Scale(domain=[0, 300])
 )
     
     c = alt.Chart(source_birs[['K/F','prices']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
-        alt.Y('prices', scale=alt.Scale(domain=[0, 200]), axis=alt.Axis(title='in USD')) #
+        alt.Y('prices', scale=alt.Scale(domain=[0, 300]), axis=alt.Axis(title='in USD')) #
         )
     
     #st.altair_chart(c, use_container_width=True)
@@ -191,12 +192,13 @@ with row3_1:
     st.write("Jackwerth (2004)")
     
     base = alt.Chart(source_data).mark_circle(color = '#7D3C98').encode(
-        alt.X("K/F"), alt.Y("callprice", )
+        alt.X("K/F"),
+        alt.Y("callprice", scale=alt.Scale(domain=[0, 300])
 )
     
     c = alt.Chart(source_bondarenko[['K/F','prices']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
-        alt.Y('prices', scale=alt.Scale(domain=[0, 200]), axis=alt.Axis(title='in USD'))
+        alt.Y('prices', scale=alt.Scale(domain=[0, 300]), axis=alt.Axis(title='in USD'))
         )
     st.altair_chart(base + c, use_container_width=True)
 
@@ -224,12 +226,13 @@ with row4_1:
     st.write("Bondarenko (2003)")
     
     base = alt.Chart(source_data).mark_circle(color = '#7D3C98').encode(
-        alt.X("K/F"), alt.Y("callprice", )
+        alt.X("K/F"),
+        alt.Y("callprice", scale=alt.Scale(domain=[0, 300])
 )
     
     c = alt.Chart(source_bondarenko[['K/F','prices']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
-        alt.Y('prices', scale=alt.Scale(domain=[0, 200]), axis=alt.Axis(title='in USD'))
+        alt.Y('prices', scale=alt.Scale(domain=[0, 300]), axis=alt.Axis(title='in USD'))
         )
     
     st.altair_chart(base + c, use_container_width=True)
