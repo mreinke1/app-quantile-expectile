@@ -156,7 +156,7 @@ with row2_1:
     st.write("Our approach (BIRS)")
     base = alt.Chart(source_data).mark_circle(color = '#7D3C98').encode(
         alt.X("K/F"),
-        alt.Y("callprice", scale=alt.Scale(domain=[0, 300])
+        alt.Y("callprice", scale=alt.Scale(domain=[0, 300]))
 )
     
     c = alt.Chart(source_birs[['K/F','prices']]).mark_line(clip=True).encode(
@@ -193,7 +193,7 @@ with row3_1:
     
     base = alt.Chart(source_data).mark_circle(color = '#7D3C98').encode(
         alt.X("K/F"),
-        alt.Y("callprice", scale=alt.Scale(domain=[0, 300])
+        alt.Y("callprice", scale=alt.Scale(domain=[0, 300]))
 )
     
     c = alt.Chart(source_bondarenko[['K/F','prices']]).mark_line(clip=True).encode(
@@ -227,7 +227,7 @@ with row4_1:
     
     base = alt.Chart(source_data).mark_circle(color = '#7D3C98').encode(
         alt.X("K/F"),
-        alt.Y("callprice", scale=alt.Scale(domain=[0, 300])
+        alt.Y("callprice", scale=alt.Scale(domain=[0, 300]))
 )
     
     c = alt.Chart(source_bondarenko[['K/F','prices']]).mark_line(clip=True).encode(
