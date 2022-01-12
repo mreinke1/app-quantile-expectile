@@ -159,7 +159,7 @@ with row2_1:
     as_=['variable', 'value']).encode(
         alt.X("K/F", scale=alt.Scale(domain=[0.7,1.2])),
         alt.Y("callprice", scale=alt.Scale(domain=[0, 200])),
-        alt.Color('Legend:N', 
+        alt.Color('variable:N', 
               scale=alt.Scale(domain=['K/F', 'callprice'],
                               range=['#ddccbb', 'red']),
               legend=alt.Legend(values=['Observed market prices'])),
