@@ -164,8 +164,8 @@ with row2_1:
         )
     
     #st.altair_chart(c, use_container_width=True)
-    
-    alt.layer(base, c)
+    st.altair_chart(base + c, use_container_width=True)
+    #alt.layer(base, c)
 
 with row2_2:
     st.write("Quantile-CDF")
