@@ -187,7 +187,7 @@ with row2_3:
 with row3_1:
     st.write("Jackwerth (2004)")
     
-    base = alt.Chart(source_data).mark_circle(clip = True, color = '#7D3C98').encode(
+    base = alt.Chart(source_data).mark_circle(clip = True, color = 'red').encode(
         alt.X("K/F", scale=alt.Scale(domain=[0.7,1.2])),
         alt.Y("callprice", scale=alt.Scale(domain=[0, 200]))
 )
@@ -221,7 +221,7 @@ with row3_3:
 with row4_1:
     st.write("Bondarenko (2003)")
     
-    base = alt.Chart(source_data).mark_circle(clip=True, color = '#7D3C98').encode(
+    base = alt.Chart(source_data).mark_circle(clip=True, color = 'red').encode(
         alt.X("K/F", scale=alt.Scale(domain=[0.7,1.2])),
         alt.Y("callprice", scale=alt.Scale(domain=[0, 200]))
 )
