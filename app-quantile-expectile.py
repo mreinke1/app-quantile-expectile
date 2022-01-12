@@ -72,31 +72,17 @@ g_date_expiry_bondarenko = results_bondarenko.groupby(['date','exdate'])
 groupList_bondarenko  = list(g_date_expiry_bondarenko)
 
 # =============================================================================
-# Load filtered data and no violations of LCS (2003)
+# Load data after filter
 # =============================================================================
-
-# LCS
-filename_lcs = 'results_lcs.parquet.gzip'
+filename_lcs = 'OptionsData_after_filter.parquet.gzip'
 root = './data/'
 location = root + filename_lcs
-results_lcs = pd.read_parquet(location)
+data_after_filter = pd.read_parquet(location)
 
-# Group Panel by date and expiry
-g_date_expiry_lcs = results_lcs.groupby(['date','exdate'])
+# Group panel by date and expiry
+g_date_expiry_data = data_after_filter.groupby(['date','exdate'])
 # Extract as list, for easier access
-groupList_lcs  = list(g_date_expiry_lcs)
-
-
-# Arbitrage violation
-filename_arbViolations = 'results_arbViolations.parquet.gzip'
-root = './data/'
-location = root + filename_arbViolations
-results_arbViolations = pd.read_parquet(location)
-
-# Group Panel by date and expiry
-g_date_expiry_arbViolations = results_arbViolations.groupby(['date','exdate'])
-# Extract as list, for easier access
-groupList_arbViolations  = list(g_date_expiry_arbViolations)
+groupList_data  = list(g_date_expiry_data)
 
 
 # =============================================================================
@@ -142,6 +128,21 @@ def get_dataset(groupList, date, dataset_name):
     
     return resultsSort
 
+
+def get_raw_data(groupList, date):
+    
+    date_num = int(date)
+    
+    results = groupList[date_num][1][['K/F', 'strike_price', 'forward_price', 'callprice']]
+    
+    resultsSort =  results.sort_values('K/F')
+        
+    return resultsSort
+
+#%% Get data
+# Raw data
+source_data = get_raw_data(groupList_data, date_selected)
+
 # Get data from selection
 source_birs = get_dataset(groupList_birs, date_selected, 'birs')
 source_jackwerth = get_dataset(groupList_jackwerth, date_selected, 'jackwerth')
@@ -153,12 +154,19 @@ source_bondarenko = get_dataset(groupList_bondarenko, date_selected, 'bondarenko
 
 with row2_1:
     st.write("Our approach (BIRS)")
+    base = alt.Chart(source_data).mark_circle(color="black").encode(
+        alt.X("K/F"), alt.Y("callprice")
+)
+    
     c = alt.Chart(source_birs[['K/F','prices']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
         alt.Y('prices', scale=alt.Scale(domain=[0, 150]), axis=alt.Axis(title='in USD'))
         )
-    st.altair_chart(c, use_container_width=True)
     
+    #st.altair_chart(c, use_container_width=True)
+    
+    alt.layer(base, *c)
+
 with row2_2:
     st.write("Quantile-CDF")
     c = alt.Chart(source_birs[['K/F','QAlpha']]).mark_line(clip=True).encode(
@@ -174,7 +182,6 @@ with row2_3:
         alt.Y('EAlpha', scale=alt.Scale(domain=[0, 1.1]), axis=alt.Axis(title=''))
         )
     st.altair_chart(c, use_container_width=True)
-
 
 # =============================================================================
 # Jackwerth (2004)
