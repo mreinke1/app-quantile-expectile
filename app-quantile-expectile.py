@@ -155,10 +155,10 @@ source_bondarenko = get_dataset(groupList_bondarenko, date_selected, 'bondarenko
 with row2_1:
     st.write("Our approach (BIRS)")
     base = alt.Chart(source_data).mark_circle(clip = True, color = '#7D3C98').encode(
-        alt.X("K/F", scale=alt.Scale(domain=[0.7,1.2]), title=''),
-        alt.Y("callprice", scale=alt.Scale(domain=[0, 200]), title=''),
+        alt.X("K/F", scale=alt.Scale(domain=[0.7,1.2])),
+        alt.Y("callprice", scale=alt.Scale(domain=[0, 200])),
         #alt.Color(legend=alt.Legend(values=['Observed market prices'])),
-        alt.Color('Symbol', scale=alt.Scale(range=['#7D3C98'], domain=['AAPL']))
+        alt.Color('Legend', scale=alt.Scale(range=['#7D3C98'], domain=['AAPL']))
 )
     c = alt.Chart(source_birs[['K/F','prices']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
