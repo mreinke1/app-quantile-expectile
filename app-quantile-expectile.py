@@ -162,8 +162,8 @@ with row2_1:
         alt.Color('variable:N', 
               scale=alt.Scale(domain=['K/F', 'callprice'],
                               range=['#ddccbb', 'red']),
-              legend=alt.Legend(values=['Market price'])),
-        order=alt.Order('Legend', sort='descending')
+              legend=alt.Legend(values=['Observed market prices'])),
+        order=alt.Order('variable:N', sort='descending')
         #alt.Color(legend=alt.Legend(values=['Observed market prices'])),
         #alt.Color('Legend',
         #          scale=alt.Scale(range='#7D3C98', domain='callprice'),
