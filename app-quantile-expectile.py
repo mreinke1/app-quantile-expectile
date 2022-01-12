@@ -156,10 +156,7 @@ with row2_1:
     st.write("Our approach (BIRS)")
     base = alt.Chart(source_data).mark_circle(clip = True, color = '#7D3C98').encode(
         alt.X("K/F", scale=alt.Scale(domain=[0.7,1.2])),
-        alt.Y("callprice", scale=alt.Scale(domain=[0, 200])),
-        x='x',
-        y='sin(x)',
-        opacity=alt.Opacity('line_label', legend=alt.Legend(title=""))
+        alt.Y("callprice", scale=alt.Scale(domain=[0, 200]), legend=alt.Legend(title='teest'))
 )
     c = alt.Chart(source_birs[['K/F','prices']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
