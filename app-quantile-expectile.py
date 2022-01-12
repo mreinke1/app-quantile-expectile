@@ -158,7 +158,9 @@ with row2_1:
         alt.X("K/F", scale=alt.Scale(domain=[0.7,1.2])),
         alt.Y("callprice", scale=alt.Scale(domain=[0, 200])),
         #alt.Color(legend=alt.Legend(values=['Observed market prices'])),
-        alt.Color('Legend', scale=alt.Scale(range=['#7D3C98'], domain=['AAPL']))
+        alt.Color('Legend',
+                  scale=alt.Scale(range=['#7d3c98'], domain=['callprice']),
+                  legend=alt.Legend(values=['Total']))
 )
     c = alt.Chart(source_birs[['K/F','prices']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
