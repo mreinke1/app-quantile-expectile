@@ -160,7 +160,7 @@ with row2_1:
     
     c = alt.Chart(source_birs[['K/F','prices']]).mark_line(clip=True).encode(
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
-        alt.Y('prices', scale=alt.Scale(domain=[0, 150]), axis=alt.Axis(title='in USD'))
+        alt.Y('prices', axis=alt.Axis(title='in USD')) #scale=alt.Scale(domain=[0, 150]),
         )
     
     #st.altair_chart(c, use_container_width=True)
