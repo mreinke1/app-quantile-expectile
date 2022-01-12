@@ -154,7 +154,7 @@ source_bondarenko = get_dataset(groupList_bondarenko, date_selected, 'bondarenko
 
 with row2_1:
     st.write("Our approach (BIRS)")
-    base = alt.Chart(source_data).mark_circle(color = 'steelblue', opacity=0.2,).encode(
+    base = alt.Chart(source_data).mark_circle(color = '#7D3C98', opacity=0.2,).encode(
         alt.X("K/F"), alt.Y("callprice", )
 )
     
