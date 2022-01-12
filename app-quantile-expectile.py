@@ -88,12 +88,14 @@ groupList_data  = list(g_date_expiry_data)
 # =============================================================================
 # Visulize results data
 # =============================================================================
-
 # LAYING OUT THE TOP SECTION OF THE APP
 row1_1, row1_2 = st.columns((4,3))
 
+import datetime as dt
+from dateutil.relativedelta import relativedelta # to add days or years
+
 with row1_1:
-    st.header("Estimation of option implied quantiles and expectiles")
+    #date_temp= st.slider("Select date in the sample", 0, len(g_date_expiry_jackwerth)-1)
     date_selected = st.slider("Select date in the sample", 0, len(g_date_expiry_jackwerth)-1)
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP
@@ -101,9 +103,8 @@ row2_1, row2_2, row2_3, row2_4 = st.columns((1,1,1,1))
 row3_1, row3_2, row3_3, row3_4 = st.columns((1,1,1,1))
 row4_1, row4_2, row4_3, row4_4 = st.columns((1,1,1,1))
 
-
 date = '0'
-days = [str(x) for x in range(len(g_date_expiry_jackwerth))]
+#days = [str(x) for x in range(len(g_date_expiry_jackwerth))]
 
 # =============================================================================
 # Define helper functions
@@ -151,7 +152,6 @@ source_bondarenko = get_dataset(groupList_bondarenko, date_selected, 'bondarenko
 # =============================================================================
 # Our approach BIRS
 # =============================================================================
-
 with row2_1:
     st.write("Our approach (BIRS)")
     base = alt.Chart(source_data).mark_circle(clip = True, color = 'red').encode(
