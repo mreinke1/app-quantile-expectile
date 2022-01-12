@@ -156,14 +156,14 @@ with row2_1:
     st.write("Our approach (BIRS)")
     base = alt.Chart(source_data).mark_circle(clip = True, color = '#7D3C98').transform_fold(
     fold=['K/F','callprice'], 
-    as_=['variable', 'value']).encode(
+    as_=['Legend', 'value']).encode(
         alt.X("K/F", scale=alt.Scale(domain=[0.7,1.2])),
         alt.Y("callprice", scale=alt.Scale(domain=[0, 200])),
         alt.Color('variable:N', 
               scale=alt.Scale(domain=['K/F', 'callprice'],
                               range=['#ddccbb', 'red']),
               legend=alt.Legend(values=['Observed market prices'])),
-        order=alt.Order('Legend:N', sort='descending')
+        order=alt.Order('variable:N', sort='descending')
         #alt.Color(legend=alt.Legend(values=['Observed market prices'])),
         #alt.Color('Legend',
         #          scale=alt.Scale(range='#7D3C98', domain='callprice'),
