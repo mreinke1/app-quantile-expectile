@@ -231,7 +231,8 @@ with row4_1:
         alt.X('K/F', scale=alt.Scale(domain=[0.7,1.2]), axis=alt.Axis(title='Forward moneyness K/F')), 
         alt.Y('prices', scale=alt.Scale(domain=[0, 150]), axis=alt.Axis(title='in USD'))
         )
-    st.altair_chart(c, use_container_width=True)
+    
+    st.altair_chart(base + c, use_container_width=True)
 
 with row4_2:
     st.write("Quantile-CDF")
@@ -248,8 +249,6 @@ with row4_3:
         alt.Y('EAlpha', scale=alt.Scale(domain=[0, 1.1]), axis=alt.Axis(title=''))
         )
     st.altair_chart(c, use_container_width=True)
-
-
 
 
 # List of references
