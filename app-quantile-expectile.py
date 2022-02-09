@@ -14,12 +14,12 @@ st.markdown('This project is joint work with [Arthur Böök](https://de.linkedin
             ' The Github repository is available [here](https://github.com/mreinke1/app-quantile-expectile)')
 st.markdown('This app allows you to see per day the estimation result for our proposed method (BIRS) to extract option implied quantiles and expectiles.'
             ' We benchmark our approach with two other methods proposed in the literature.'
-            ' Please note that the paper is currently work in progress. Comments welcome.')
+            ' Please note that the paper is currently work in progress. Comments are welcome.')
 st.markdown("")
-st.markdown("We use short term options so called 'weeklys' on the S&P 500 traded on the CBOE and downloaded from OptionMetrics."
+st.markdown("We use short term options so called Weeklys on the S&P 500 traded on the CBOE and downloaded from OptionMetrics."
             " Statistically, quantiles and expectiles share many similar properties but differ substantially in one aspect."
-            " While quantiles determines the value of X such that the probability of the variable being less than or equal to "
-            " that value equals a given level. Expectiles are linked to the properties of the expectation"
+            " While quantiles determine the value of X such that the probability of the variable being less than or equal to "
+            " that value equals a given level, expectiles are linked to the properties of the expectation"
             " of the random variable X, conditional on X being into the tail of the distribution.")
 
 st.subheader("Option implied quantiles")
@@ -252,6 +252,6 @@ with row4_3:
 
 # List of references
 st.header("References")
-st.markdown('Bondarenko, O. (2003). Estimation of risk-neutral densities using positive convolution approximation. Journal of Econometrics, 116(1-2), 85-112 ')
+st.markdown('Bondarenko, O. (2003). Estimation of risk-neutral densities using positive convolution approximation. Journal of Econometrics, 116(1-2), 85-112.')
 st.markdown('Jackwerth, J. C. (2004). Option-Implied Risk-Neutral Distributions and Risk Aversion, Research Foundation of AIMR, Charlottesville, VA, ISBN 0-943205-66-2.')
 
