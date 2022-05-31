@@ -18,9 +18,9 @@ st.markdown('This app allows you to see per day the estimation result for our pr
 st.markdown("")
 st.markdown("We use short term options so called Weeklys on the S&P 500 traded on the CBOE and downloaded from OptionMetrics."
             " Statistically, quantiles and expectiles share many similar properties but differ substantially in one aspect."
-            " While quantiles determine the value of X such that the probability of the variable being less than or equal to "
+            " While quantiles determine the value of $X$ such that the probability of the variable being less than or equal to "
             " that value equals a given level, expectiles are linked to the properties of the expectation"
-            " of the random variable X, conditional on X being into the tail of the distribution.")
+            " of the random variable $X$, conditional on $X$ being into the tail of the distribution.")
 
 st.subheader("Option implied quantiles")
 st.latex(r'''
